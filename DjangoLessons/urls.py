@@ -17,12 +17,16 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
 
-from lesson1 import views
-
 router = routers.DefaultRouter()
-router.register(r'DjangoLessons/lesson1', views.StudentViewSet)
+# router.register(r'DjangoLessons/lesson1', views.StudentViewSet)
+import lesson2
+from lesson2 import views
+from rest_framework.authtoken import views
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^test/', lesson2.views.test),
     url(r'^admin/', admin.site.urls),
+    url(r'^api-token-auth/', views.obtain_auth_token),  # 获取token
+    url(r'^user-login/', lesson2.views.user_login),
 ]
